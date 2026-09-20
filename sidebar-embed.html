@@ -1,0 +1,646 @@
+<title>零部件活动位侧边栏</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  color-scheme:light;
+  --ground:#EDF0F4;
+  --ground-2:#F8FAFC;
+  --card:#FFFFFF;
+  --line:#D8DEE7;
+  --line-2:#E4E9F0;
+  --text:#15202F;
+  --text-2:#5A6573;
+  --text-3:#8B94A1;
+  --navy:#1B3A8F;
+  --yellow:#FFC800;
+  --shadow:0 1px 2px rgba(21,32,47,.05),0 14px 34px -14px rgba(21,32,47,.22);
+  --font-display:'Archivo','Noto Sans SC',system-ui,sans-serif;
+  --font-body:'Noto Sans SC','Archivo',system-ui,sans-serif;
+  --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --ground:#0E141C;
+    --ground-2:#131A24;
+    --card:#182130;
+    --line:#2A3546;
+    --line-2:#1F2836;
+    --text:#E8EDF4;
+    --text-2:#9AA6B6;
+    --text-3:#6E7A8C;
+    --navy:#5B84E8;
+    --yellow:#FFD333;
+    --shadow:0 1px 2px rgba(0,0,0,.45),0 14px 34px -14px rgba(0,0,0,.7);
+  }
+}
+
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#0E141C;
+  --ground-2:#131A24;
+  --card:#182130;
+  --line:#2A3546;
+  --line-2:#1F2836;
+  --text:#E8EDF4;
+  --text-2:#9AA6B6;
+  --text-3:#6E7A8C;
+  --navy:#5B84E8;
+  --yellow:#FFD333;
+  --shadow:0 1px 2px rgba(0,0,0,.45),0 14px 34px -14px rgba(0,0,0,.7);
+}
+
+html,body{margin:0;padding:0}
+body{
+  background:#FFFFFF;
+  color:#15202F;
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============ 访客端侧边栏活动位 · 宽 360 · 高自适应 ============ */
+
+.panel{
+  --p-ink:#15202F;
+  --p-ink-2:#5A6573;
+  --p-ink-3:#8C96A3;
+  --p-navy:#1B3A8F;
+  --p-navy-d:#0F2050;
+  --p-navy-l:#2C56C4;
+  --p-yellow:#FFC800;
+  --p-yellow-d:#E5A900;
+  --p-red:#C8342B;
+  --p-steel:#F1F4F8;
+  --p-steel-2:#DCE2EA;
+  --p-steel-3:#B6BFCB;
+  --p-white:#FFFFFF;
+
+  width:100%;
+  max-width:360px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  padding:12px;
+  gap:10px;
+  background:var(--p-white);
+  color:var(--p-ink);
+  font-family:var(--font-body);
+}
+
+.p-head{
+  height:46px;
+  flex:none;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  border-bottom:1px solid var(--p-steel-2);
+  padding-bottom:9px;
+}
+.p-title{
+  position:relative;
+  font-size:16px;
+  font-weight:900;
+  letter-spacing:.02em;
+  padding-bottom:5px;
+}
+.p-title::after{
+  content:"";
+  position:absolute;
+  left:0;bottom:0;
+  width:38px;height:3px;
+  background:var(--p-navy);
+  border-radius:2px;
+}
+.p-more{
+  font-size:12px;
+  color:var(--p-ink-3);
+  text-decoration:none;
+  white-space:nowrap;
+}
+.p-more:hover{color:var(--p-navy)}
+
+.p-body{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* ---- 通用 banner ---- */
+.bn{
+  position:relative;
+  display:block;
+  flex:none;
+  border-radius:8px;
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  isolation:isolate;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.bn:hover{transform:translateY(-2px);box-shadow:0 10px 22px -10px rgba(21,32,47,.4)}
+.bn:focus-visible{outline:2px solid var(--p-yellow);outline-offset:2px}
+.bn-a{height:138px}
+.bn-b{height:200px}
+.bn-c{height:214px}
+
+/* ---- A：深蓝折扣主视觉 ---- */
+.bn-a{
+  background:linear-gradient(112deg,#1E3F97 0%,#152F79 58%,#0F2050 100%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:0 18px;
+}
+.a-arrow{
+  position:absolute;
+  top:-22px;right:-16px;
+  width:64px;height:64px;
+  z-index:0;
+  opacity:.55;
+  pointer-events:none;
+}
+.a-left{position:relative;z-index:1;max-width:152px}
+.a-cap{
+  display:block;
+  font-family:var(--font-mono);
+  font-size:9px;
+  letter-spacing:.13em;
+  color:#9FB6EE;
+  text-transform:uppercase;
+  margin-bottom:7px;
+}
+.a-l1{
+  display:block;
+  font-family:var(--font-display);
+  font-size:23px;
+  font-weight:900;
+  color:var(--p-white);
+  letter-spacing:.04em;
+  line-height:1.1;
+  white-space:nowrap;
+  margin-bottom:11px;
+}
+.a-pill{
+  display:inline-flex;
+  align-items:center;
+  background:var(--p-white);
+  color:var(--p-navy);
+  font-size:13px;
+  font-weight:900;
+  padding:8px 16px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.a-right{
+  position:relative;
+  z-index:1;
+  flex:1;
+  text-align:right;
+}
+.a-l2{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  gap:3px;
+}
+.a-l2 .t{
+  font-size:15px;
+  font-weight:700;
+  color:#D6E1FA;
+  line-height:1;
+  padding-bottom:10px;
+  white-space:nowrap;
+}
+.a-l2 .n{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:66px;
+  line-height:.8;
+  color:var(--p-yellow);
+  letter-spacing:-.03em;
+}
+.a-l2 .u{font-size:26px;font-weight:900;color:var(--p-yellow);line-height:1;padding-bottom:3px}
+
+/* ---- B：3D 模型库 ---- */
+.bn-b{
+  background:linear-gradient(160deg,#FCFDFE 0%,#EFF3F8 52%,#E2E8F0 100%);
+  background-image:
+    linear-gradient(#DFE6EE 1px,transparent 1px),
+    linear-gradient(90deg,#DFE6EE 1px,transparent 1px),
+    linear-gradient(160deg,#FCFDFE 0%,#EAF0F7 100%);
+  background-size:13px 13px,13px 13px,100% 100%;
+  padding:13px;
+}
+.b-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  max-width:216px;
+}
+.b-mark{width:36px;height:36px;flex:none}
+.b-title{
+  display:block;
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:.01em;
+  line-height:1.2;
+  white-space:nowrap;
+}
+.b-sub{display:block;font-size:10.5px;color:var(--p-ink-2);margin-top:4px;white-space:nowrap}
+.b-btn{
+  position:relative;
+  z-index:2;
+  display:block;
+  width:152px;
+  margin:12px auto 0;
+  text-align:center;
+  background:linear-gradient(180deg,#FFD62E,#F0B400);
+  color:#4A3400;
+  font-size:13px;
+  font-weight:900;
+  padding:9px 0;
+  border-radius:5px;
+  box-shadow:0 2px 0 #C99200,0 6px 12px -6px rgba(160,110,0,.6);
+}
+.b-star{
+  position:absolute;
+  top:8px;right:8px;
+  width:46px;height:46px;
+  z-index:3;
+  display:grid;
+  place-items:center;
+}
+.b-star span{
+  position:relative;
+  font-size:11px;
+  font-weight:900;
+  color:var(--p-white);
+  letter-spacing:.04em;
+}
+
+.b-parts{position:absolute;inset:0;z-index:1;pointer-events:none}
+.part{position:absolute;filter:drop-shadow(0 5px 7px rgba(24,42,72,.18))}
+.pt-gear{left:12px;bottom:14px;width:56px;height:56px}
+.pt-bear{left:74px;bottom:10px;width:48px;height:48px}
+.pt-rail{left:130px;bottom:26px;width:106px;height:38px}
+.pt-coup{right:10px;bottom:14px;width:68px;height:34px}
+
+/* ---- C：特惠放大招 ---- */
+.bn-c{
+  background:linear-gradient(115deg,#FBFCFD 0%,#EDF1F6 48%,#D9E1EB 100%);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+}
+.bn-c::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:linear-gradient(96deg,#FBFCFD 0%,rgba(251,252,253,.95) 36%,rgba(251,252,253,0) 64%);
+  pointer-events:none;
+}
+.c-plinth{
+  position:absolute;
+  right:6px;bottom:0;
+  width:158px;height:58px;
+  background:linear-gradient(180deg,#C8D0DA,#A9B4C2);
+  border-radius:4px 4px 0 0;
+  z-index:0;
+}
+.c-plinth::after{
+  content:"";
+  position:absolute;
+  right:-52px;bottom:0;
+  width:80px;height:30px;
+  background:linear-gradient(180deg,#D6DCE4,#BDC6D2);
+  border-radius:4px 4px 0 0;
+}
+.c-hero{
+  position:absolute;
+  right:-42px;bottom:-18px;
+  width:208px;height:208px;
+  z-index:1;
+  filter:drop-shadow(-8px 12px 18px rgba(24,42,72,.3));
+}
+.c-body{position:relative;z-index:3;max-width:172px}
+.c-title{
+  display:block;
+  font-size:31px;
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:.01em;
+  color:#141C28;
+  white-space:nowrap;
+  text-shadow:0 1px 0 rgba(255,255,255,.8);
+}
+.c-bar{
+  display:inline-flex;
+  align-items:stretch;
+  margin-top:12px;
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow:0 4px 10px -5px rgba(21,32,47,.5);
+}
+.c-bar .txt{
+  background:var(--p-navy);
+  color:var(--p-white);
+  font-size:12.5px;
+  font-weight:700;
+  padding:7px 10px;
+  white-space:nowrap;
+}
+.c-bar .tag{
+  background:linear-gradient(180deg,#FFD62E,#EEB200);
+  color:#4A3400;
+  font-size:10.5px;
+  font-weight:900;
+  line-height:1.15;
+  padding:4px 7px;
+  display:flex;
+  align-items:center;
+  text-align:center;
+}
+.c-sub{
+  display:block;
+  max-width:142px;
+  margin-top:12px;
+  font-size:10.5px;
+  line-height:1.6;
+  color:#4C5766;
+  letter-spacing:.01em;
+}
+
+/* ---- 优惠券条 ---- */
+.p-coupon{
+  flex:none;
+  height:62px;
+  display:flex;
+  gap:8px;
+}
+.cp{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:1px;
+  border:1px dashed #C6A24B;
+  border-radius:6px;
+  background:linear-gradient(180deg,#FFFDF4,#FFF6DC);
+  text-align:center;
+}
+.cp b{
+  font-family:var(--font-display);
+  font-size:19px;
+  font-weight:900;
+  color:#9A6B00;
+  line-height:1;
+  letter-spacing:-.01em;
+}
+.cp span{font-size:10px;color:#8A7433}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="steelV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".3" stop-color="#D2D9E2"/>
+      <stop offset=".55" stop-color="#9AA5B4"/>
+      <stop offset=".78" stop-color="#C2CAD5"/>
+      <stop offset="1" stop-color="#E8ECF1"/>
+    </linearGradient>
+    <linearGradient id="steelH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E4E9EF"/>
+      <stop offset=".22" stop-color="#FDFEFF"/>
+      <stop offset=".58" stop-color="#A7B2C0"/>
+      <stop offset=".84" stop-color="#CDD5DF"/>
+      <stop offset="1" stop-color="#8D98A7"/>
+    </linearGradient>
+    <radialGradient id="steelR" cx=".36" cy=".3" r=".78">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".42" stop-color="#CED6E0"/>
+      <stop offset=".78" stop-color="#98A3B2"/>
+      <stop offset="1" stop-color="#B9C2CD"/>
+    </radialGradient>
+    <radialGradient id="steelB" cx=".34" cy=".3" r=".75">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".5" stop-color="#C9D1DC"/>
+      <stop offset="1" stop-color="#8A95A4"/>
+    </radialGradient>
+    <radialGradient id="boreR" cx=".38" cy=".32" r=".8">
+      <stop offset="0" stop-color="#6C7684"/>
+      <stop offset="1" stop-color="#333C49"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<div class="panel" id="panel">
+
+        <div class="p-head">
+          <span class="p-title">工业零部件 · 活动专场</span>
+          <a class="p-more" href="https://www.zhichi.com/" target="_blank" rel="noopener">全部活动 ›</a>
+        </div>
+
+        <div class="p-body">
+
+          <!-- A -->
+          <a class="bn bn-a" href="https://www.zhichi.com/" target="_blank" rel="noopener" aria-label="FA标准品大订单低至2折，查看详情">
+            <span class="a-arrow" data-part="arrow"></span>
+            <span class="a-left">
+              <span class="a-cap">FA Standard</span>
+              <span class="a-l1">FA 标准品</span>
+              <span class="a-pill">详情请点击 ››</span>
+            </span>
+            <span class="a-right">
+              <span class="a-l2">
+                <span class="t">大订单低至</span>
+                <span class="n">2</span>
+                <span class="u">折</span>
+              </span>
+            </span>
+          </a>
+
+          <!-- B -->
+          <a class="bn bn-b" href="https://www.zhichi.com/" target="_blank" rel="noopener" aria-label="新型离线3D模型库，免费获取安装包">
+            <span class="b-star" data-part="star"><span>免费</span></span>
+            <span class="b-top">
+              <span class="b-mark" data-part="cube"></span>
+              <span>
+                <span class="b-title">新型离线3D模型库</span>
+                <span class="b-sub">专为机械设计师定制</span>
+              </span>
+            </span>
+            <span class="b-btn">免费获取安装包</span>
+            <span class="b-parts">
+              <span class="part pt-gear" data-part="gear"></span>
+              <span class="part pt-bear" data-part="bearing"></span>
+              <span class="part pt-rail" data-part="rail"></span>
+              <span class="part pt-coup" data-part="coupling"></span>
+            </span>
+          </a>
+
+          <!-- C -->
+          <a class="bn bn-c" href="https://www.zhichi.com/" target="_blank" rel="noopener" aria-label="特惠放大招，畅享零部件折扣品">
+            <span class="c-plinth"></span>
+            <span class="c-hero" data-part="roller"></span>
+            <span class="c-body">
+              <span class="c-title">特惠放大招</span>
+              <span class="c-bar">
+                <span class="txt">畅享零部件折扣品</span>
+                <span class="tag">限量<br>特卖</span>
+              </span>
+              <span class="c-sub">工业自动化零件：低价折扣，种类齐全</span>
+            </span>
+          </a>
+
+          <div class="p-coupon">
+            <div class="cp"><b>¥100</b><span>满 1000 可用</span></div>
+            <div class="cp"><b>¥50</b><span>新人首单</span></div>
+          </div>
+
+        </div>
+      </div>
+
+<script>
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function mk(tag, attrs, parent){
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function svgBox(){
+    return mk('svg', {viewBox:'0 0 100 100', width:'100%', height:'100%', fill:'none'});
+  }
+
+  /* 齿轮 */
+  function gear(){
+    var s = svgBox(), g = mk('g', {transform:'translate(50 50)'}, s), i;
+    for (i = 0; i < 14; i++){
+      mk('rect', {x:-5, y:-46, width:10, height:14, rx:2,
+                  fill:'url(#steelV)', transform:'rotate(' + (i * 360 / 14) + ')'}, g);
+    }
+    mk('circle', {r:38, fill:'url(#steelV)', stroke:'#98A3B2', 'stroke-width':1}, g);
+    mk('circle', {r:30, fill:'url(#steelR)'}, g);
+    mk('circle', {r:14, fill:'url(#boreR)'}, g);
+    mk('circle', {r:14, fill:'none', stroke:'#5C6673', 'stroke-width':1.5}, g);
+    return s;
+  }
+
+  /* 轴承 */
+  function bearing(){
+    var s = svgBox(), g = mk('g', {transform:'translate(50 50)'}, s), i, a;
+    mk('circle', {r:46, fill:'url(#steelV)', stroke:'#98A3B2', 'stroke-width':1}, g);
+    mk('circle', {r:36, fill:'url(#steelR)'}, g);
+    for (i = 0; i < 10; i++){
+      a = i * 36 * Math.PI / 180;
+      mk('circle', {cx:(Math.cos(a) * 29).toFixed(2), cy:(Math.sin(a) * 29).toFixed(2),
+                    r:6.4, fill:'url(#steelB)'}, g);
+    }
+    mk('circle', {r:21, fill:'url(#steelV)'}, g);
+    mk('circle', {r:11, fill:'url(#boreR)'}, g);
+    return s;
+  }
+
+  /* 线性滑轨 */
+  function rail(){
+    var s = mk('svg', {viewBox:'0 0 180 64', width:'100%', height:'100%', fill:'none'}), i;
+    mk('rect', {x:2, y:16, width:176, height:32, rx:5, fill:'url(#steelH)', stroke:'#98A3B2', 'stroke-width':1}, s);
+    mk('rect', {x:12, y:25, width:156, height:14, rx:3, fill:'#AEB8C4'}, s);
+    mk('rect', {x:12, y:25, width:156, height:6, rx:3, fill:'#8B96A5'}, s);
+    for (i = 0; i < 4; i++){
+      mk('circle', {cx:32 + i * 39, cy:32, r:6.4, fill:'none', stroke:'#C4CCD6'}, s);
+      mk('circle', {cx:32 + i * 39, cy:32, r:4.2, fill:'url(#boreR)'}, s);
+    }
+    return s;
+  }
+
+  /* 轴 */
+  function shaft(){
+    var s = mk('svg', {viewBox:'0 0 150 44', width:'100%', height:'100%', fill:'none'});
+    mk('rect', {x:7, y:10, width:130, height:24, fill:'url(#steelV)'}, s);
+    mk('ellipse', {cx:137, cy:22, rx:7, ry:12, fill:'url(#steelR)'}, s);
+    mk('ellipse', {cx:7, cy:22, rx:7, ry:12, fill:'#B4BDC8'}, s);
+    mk('rect', {x:52, y:10, width:3, height:24, fill:'#9AA4B2', opacity:.7}, s);
+    mk('rect', {x:92, y:10, width:3, height:24, fill:'#9AA4B2', opacity:.7}, s);
+    return s;
+  }
+
+  /* 联轴器 */
+  function coupling(){
+    var s = mk('svg', {viewBox:'0 0 120 60', width:'100%', height:'100%', fill:'none'});
+    mk('rect', {x:4, y:17, width:46, height:26, rx:4, fill:'url(#steelV)', stroke:'#98A3B2'}, s);
+    mk('rect', {x:54, y:11, width:60, height:38, rx:5, fill:'url(#steelH)', stroke:'#98A3B2'}, s);
+    mk('ellipse', {cx:114, cy:30, rx:5, ry:19, fill:'#C6CED8'}, s);
+    mk('circle', {cx:26, cy:30, r:4.5, fill:'url(#boreR)'}, s);
+    return s;
+  }
+
+  /* 滚轮（C 位主图） */
+  function roller(){
+    var s = svgBox(), g = mk('g', {transform:'translate(50 50)'}, s);
+    mk('circle', {r:48, fill:'url(#steelV)', stroke:'#8E99A8', 'stroke-width':1}, g);
+    mk('circle', {r:41, fill:'url(#steelR)'}, g);
+    mk('circle', {r:25, fill:'url(#steelV)'}, g);
+    mk('circle', {r:15, fill:'url(#boreR)'}, g);
+    mk('circle', {r:15, fill:'none', stroke:'#4E5866', 'stroke-width':2}, g);
+    mk('circle', {cx:-14, cy:-16, r:7, fill:'#FFFFFF', opacity:.42}, g);
+    return s;
+  }
+
+  /* 等轴立方体标识 */
+  function cube(){
+    var s = svgBox();
+    mk('path', {d:'M50 5 L93 29 L50 53 L7 29 Z', fill:'#FFC800'}, s);
+    mk('path', {d:'M7 29 L50 53 L50 96 L7 72 Z', fill:'#1B3A8F'}, s);
+    mk('path', {d:'M93 29 L93 72 L50 96 L50 53 Z', fill:'#2C56C4'}, s);
+    mk('path', {d:'M50 5 L93 29 L50 53 L7 29 Z', fill:'none', stroke:'#E0A800', 'stroke-width':1}, s);
+    return s;
+  }
+
+  /* 免费爆炸贴 */
+  function star(){
+    var s = svgBox(), d = '', i, rad, a, n = 12, R = 48, r = 35;
+    for (i = 0; i < n * 2; i++){
+      rad = (i % 2) ? r : R;
+      a = i * Math.PI / n - Math.PI / 2;
+      d += (i ? 'L' : 'M') + (50 + Math.cos(a) * rad).toFixed(1) + ' ' + (50 + Math.sin(a) * rad).toFixed(1);
+    }
+    mk('path', {d:d + 'Z', fill:'#1B3A8F'}, s);
+    return s;
+  }
+
+  /* 向下箭头 */
+  function arrow(){
+    var s = svgBox();
+    mk('path', {d:'M50 6 L95 52 H71 V95 H29 V52 H5 Z', fill:'#FFFFFF', opacity:.2}, s);
+    return s;
+  }
+
+  var PARTS = {gear:gear, bearing:bearing, rail:rail, shaft:shaft, coupling:coupling,
+               roller:roller, cube:cube, star:star, arrow:arrow};
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-part]'), function(host){
+    var fn = PARTS[host.getAttribute('data-part')];
+    if (fn) host.appendChild(fn());
+  });
+
+})();
+</script>
