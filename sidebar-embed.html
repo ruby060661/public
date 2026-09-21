@@ -94,31 +94,6 @@ body{
   font-synthesis-weight:none;
 }
 
-/* 顶部快栏目：与客服端自带「活动专场」标题错开，尺寸与下方主视觉对齐 */
-.p-quick{
-  flex:none;
-  display:flex;
-  align-items:center;
-}
-.qk{
-  display:inline-flex;
-  align-items:center;
-  gap:3px;
-  padding:6px 11px;
-  border-radius:999px;
-  background:linear-gradient(112deg,#3E63C8 0%,#2F4FB0 58%,#24409B 100%);
-  color:var(--p-white);
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:.02em;
-  text-decoration:none;
-  white-space:nowrap;
-  transition:filter .18s ease;
-}
-.qk:hover{filter:brightness(1.12)}
-.qk:focus-visible{outline:2px solid var(--p-navy);outline-offset:2px}
-.qk-arrow{font-size:13px;font-weight:400;line-height:1;opacity:.9}
-
 .p-body{
   display:flex;
   flex-direction:column;
@@ -451,12 +426,6 @@ body{
 </svg>
 
 <div class="panel" id="panel">
-
-        <div class="p-quick">
-          <a class="qk" href="https://www.zhichi.com/" target="_blank" rel="noopener" aria-label="查看全部活动">
-            <span>全部活动</span><span class="qk-arrow" aria-hidden="true">›</span>
-          </a>
-        </div>
 
         <div class="p-body">
 
