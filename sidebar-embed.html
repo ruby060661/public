@@ -91,40 +91,33 @@ body{
   background:var(--p-white);
   color:var(--p-ink);
   font-family:var(--font-body);
+  font-synthesis-weight:none;
 }
 
-.p-head{
-  height:46px;
+/* 顶部快栏目：与客服端自带「活动专场」标题错开，尺寸与下方主视觉对齐 */
+.p-quick{
   flex:none;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:8px;
-  border-bottom:1px solid var(--p-steel-2);
-  padding-bottom:9px;
 }
-.p-title{
-  position:relative;
-  font-size:16px;
-  font-weight:900;
+.qk{
+  display:inline-flex;
+  align-items:center;
+  gap:3px;
+  padding:6px 11px;
+  border-radius:999px;
+  background:linear-gradient(112deg,#3E63C8 0%,#2F4FB0 58%,#24409B 100%);
+  color:var(--p-white);
+  font-size:11px;
+  font-weight:700;
   letter-spacing:.02em;
-  padding-bottom:5px;
-}
-.p-title::after{
-  content:"";
-  position:absolute;
-  left:0;bottom:0;
-  width:38px;height:3px;
-  background:var(--p-navy);
-  border-radius:2px;
-}
-.p-more{
-  font-size:12px;
-  color:var(--p-ink-3);
   text-decoration:none;
   white-space:nowrap;
+  transition:filter .18s ease;
 }
-.p-more:hover{color:var(--p-navy)}
+.qk:hover{filter:brightness(1.12)}
+.qk:focus-visible{outline:2px solid var(--p-navy);outline-offset:2px}
+.qk-arrow{font-size:13px;font-weight:400;line-height:1;opacity:.9}
 
 .p-body{
   display:flex;
@@ -156,8 +149,8 @@ body{
   display:flex;
   align-items:center;
   justify-content:space-between;
-  gap:10px;
-  padding:0 18px;
+  gap:8px;
+  padding:0 14px;
 }
 .a-arrow{
   position:absolute;
@@ -167,7 +160,7 @@ body{
   opacity:.55;
   pointer-events:none;
 }
-.a-left{position:relative;z-index:1;max-width:152px}
+.a-left{position:relative;z-index:1;flex:0 1 auto;min-width:0;max-width:118px}
 .a-cap{
   display:block;
   font-family:var(--font-mono);
@@ -180,22 +173,22 @@ body{
 .a-l1{
   display:block;
   font-family:var(--font-display);
-  font-size:23px;
+  font-size:20px;
   font-weight:900;
   color:var(--p-white);
   letter-spacing:.04em;
   line-height:1.1;
   white-space:nowrap;
-  margin-bottom:11px;
+  margin-bottom:9px;
 }
 .a-pill{
   display:inline-flex;
   align-items:center;
   background:var(--p-white);
   color:var(--p-navy);
-  font-size:13px;
+  font-size:12px;
   font-weight:900;
-  padding:8px 16px;
+  padding:7px 13px;
   border-radius:999px;
   white-space:nowrap;
 }
@@ -203,6 +196,7 @@ body{
   position:relative;
   z-index:1;
   flex:1;
+  min-width:0;
   text-align:right;
 }
 .a-l2{
@@ -212,22 +206,29 @@ body{
   gap:3px;
 }
 .a-l2 .t{
-  font-size:15px;
+  font-size:13.5px;
   font-weight:700;
   color:#D6E1FA;
   line-height:1;
-  padding-bottom:10px;
+  padding-bottom:9px;
   white-space:nowrap;
 }
 .a-l2 .n{
   font-family:var(--font-display);
   font-weight:900;
-  font-size:66px;
+  font-size:56px;
   line-height:.8;
   color:var(--p-yellow);
-  letter-spacing:-.03em;
+  letter-spacing:-.02em;
 }
-.a-l2 .u{font-size:26px;font-weight:900;color:var(--p-yellow);line-height:1;padding-bottom:3px}
+.a-l2 .u{
+  font-size:26px;
+  font-weight:700;
+  color:var(--p-yellow);
+  line-height:1;
+  padding-bottom:3px;
+  padding-right:1px;
+}
 
 /* ---- B：3D 模型库 ---- */
 .bn-b{
@@ -451,9 +452,10 @@ body{
 
 <div class="panel" id="panel">
 
-        <div class="p-head">
-          <span class="p-title">工业零部件 · 活动专场</span>
-          <a class="p-more" href="https://www.zhichi.com/" target="_blank" rel="noopener">全部活动 ›</a>
+        <div class="p-quick">
+          <a class="qk" href="https://www.zhichi.com/" target="_blank" rel="noopener" aria-label="查看全部活动">
+            <span>全部活动</span><span class="qk-arrow" aria-hidden="true">›</span>
+          </a>
         </div>
 
         <div class="p-body">
