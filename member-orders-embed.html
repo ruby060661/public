@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>客服侧边栏 · 会员信息/历史订单/推荐商品（嵌入版）</title>
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  --brand:#123293;
+  --brand-d:#0C2470;
+  --brand-l:#E9EDF8;
+  --ink:#1F2430;
+  --ink-2:#4A5160;
+  --ink-3:#8A9099;
+  --line:#E3E6EC;
+  --line-2:#EDEFF3;
+  --card:#FFFFFF;
+  --font-body:"Microsoft YaHei","微软雅黑","PingFang SC",system-ui,sans-serif;
+}
+
+html,body{margin:0;padding:0}
+body{
+  background:#FFFFFF;
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ================= 面板本体（无外壳，靠左） ================= */
+.panel{
+  width:100%;
+  max-width:360px;
+  margin:0;
+  padding:14px 14px 18px;
+  background:#FFF;
+  font-family:var(--font-body);
+  color:var(--ink);
+}
+
+.sec + .sec{margin-top:20px}
+.sec-t{
+  font-size:15px;font-weight:700;color:var(--ink);
+  margin:0 0 10px;letter-spacing:.02em;
+}
+
+/* ---- 会员信息 ---- */
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:7px 10px;
+  margin:0;
+}
+.info .kv{display:flex;align-items:baseline;min-width:0}
+.info dt{flex:none;font-size:12.5px;color:var(--ink-3);letter-spacing:.01em}
+.info dd{margin:0 0 0 2px;font-size:12.5px;color:var(--ink-2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.more{
+  display:block;text-align:right;
+  font-size:12.5px;color:var(--brand);text-decoration:none;
+  margin-top:10px;
+}
+.more:hover{text-decoration:underline}
+
+/* ---- 订单 / 商品卡 ---- */
+.card{
+  border:1px solid var(--line);
+  border-radius:6px;
+  background:var(--card);
+  padding:10px 11px 11px;
+}
+.card + .card{margin-top:10px}
+
+.o-no{font-size:12.5px;color:var(--ink-2);margin:0 0 5px}
+.o-title{font-size:13px;color:var(--ink);margin:0 0 9px;line-height:1.5}
+
+.o-body{display:flex;gap:9px;align-items:flex-start}
+.o-thumb{
+  flex:none;width:76px;height:56px;
+  border:1px solid var(--line-2);border-radius:4px;
+  background:#F7F9FB;overflow:hidden;
+}
+.o-thumb svg{display:block;width:100%;height:100%}
+
+.o-meta{flex:1;min-width:0}
+.o-meta p{margin:0 0 3px;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+.o-meta p:last-child{margin-bottom:0}
+.o-meta b{color:var(--ink);font-weight:700}
+
+.g-spec{font-size:12px;color:var(--ink-3);margin:0 0 5px;line-height:1.5}
+.g-price{font-size:13.5px;font-weight:700;color:var(--ink);margin:0}
+
+/* ---- 按钮 ---- */
+.o-act{display:flex;justify-content:flex-end;gap:8px;margin-top:11px}
+.btn{
+  font-family:var(--font-body);
+  font-size:12.5px;font-weight:700;
+  line-height:1;
+  padding:8px 16px;
+  border-radius:4px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:background .15s ease,border-color .15s ease;
+}
+.btn-p{background:var(--brand);border-color:var(--brand);color:#FFF}
+.btn-p:hover{background:var(--brand-d);border-color:var(--brand-d)}
+.btn-s{background:#FFF;border-color:#B9C4DD;color:var(--brand)}
+.btn-s:hover{background:var(--brand-l);border-color:var(--brand)}
+
+/* ---- 推荐商品 ---- */
+.rec .o-body{align-items:flex-start}
+.rec .o-meta p{margin-bottom:6px}
+.r-name{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 8px;line-height:1.5}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="steelV" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".3" stop-color="#D2D9E2"/>
+      <stop offset=".55" stop-color="#9AA5B4"/>
+      <stop offset=".78" stop-color="#C2CAD5"/>
+      <stop offset="1" stop-color="#E8ECF1"/>
+    </linearGradient>
+    <linearGradient id="steelH" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#E4E9EF"/>
+      <stop offset=".22" stop-color="#FDFEFF"/>
+      <stop offset=".58" stop-color="#A7B2C0"/>
+      <stop offset=".84" stop-color="#CDD5DF"/>
+      <stop offset="1" stop-color="#8D98A7"/>
+    </linearGradient>
+    <radialGradient id="steelR" cx=".36" cy=".3" r=".78">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".42" stop-color="#CED6E0"/>
+      <stop offset=".78" stop-color="#98A3B2"/>
+      <stop offset="1" stop-color="#B9C2CD"/>
+    </radialGradient>
+    <radialGradient id="boreR" cx=".38" cy=".32" r=".8">
+      <stop offset="0" stop-color="#6C7684"/>
+      <stop offset="1" stop-color="#333C49"/>
+    </radialGradient>
+  </defs>
+</svg>
+
+<div class="panel" id="panel">
+
+  <!-- ============ 会员信息 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">会员信息：</h2>
+    <dl class="info">
+      <div class="kv"><dt>会员编号：</dt><dd>MS000301</dd></div>
+      <div class="kv"><dt>会员等级：</dt><dd>黄金会员</dd></div>
+      <div class="kv"><dt>公司名称：</dt><dd>精工自动化</dd></div>
+      <div class="kv"><dt>专属折扣：</dt><dd>9折</dd></div>
+      <div class="kv"><dt>账户余额：</dt><dd>2300元</dd></div>
+      <div class="kv"><dt>采购积分：</dt><dd>34159.26</dd></div>
+      <div class="kv"><dt>注册时间：</dt><dd>5年</dd></div>
+      <div class="kv"><dt>合约到期：</dt><dd>5年</dd></div>
+      <div class="kv"><dt>采购总额：</dt><dd>109.9万元</dd></div>
+      <div class="kv"><dt>采购次数：</dt><dd>32次</dd></div>
+    </dl>
+    <a class="more" href="https://www.zhichi.com/" target="_blank" rel="noopener">查看更多...</a>
+  </section>
+
+  <!-- ============ 历史订单 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">历史订单：</h2>
+
+    <article class="card">
+      <p class="o-no">订单编号：MS2608150231</p>
+      <p class="o-title">机构安装组件 底座/立柱/锁块/加强块 等2件商品</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <rect x="8" y="34" width="26" height="7" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="15" cy="37.5" r="1.6" fill="url(#boreR)"/>
+            <circle cx="27" cy="37.5" r="1.6" fill="url(#boreR)"/>
+            <rect x="18" y="14" width="6" height="20" rx="1" fill="url(#steelH)" stroke="#B6BFCB" stroke-width=".6"/>
+            <rect x="40" y="30" width="14" height="11" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="47" cy="35.5" r="2.4" fill="url(#boreR)"/>
+            <path d="M58 41 L70 41 L70 29 Z" fill="url(#steelR)" stroke="#B6BFCB" stroke-width=".6"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p>2件商品，合计：<b>572.50元</b></p>
+          <p>订单状态：待发货</p>
+          <p>下单时间：2026-08-15 14:40:06</p>
+        </div>
+      </div>
+      <div class="o-act">
+        <button class="btn btn-p" type="button">发送</button>
+        <button class="btn btn-s" type="button">创建工单</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="o-no">订单编号：MS2603120087</p>
+      <p class="o-title">便捷可调式转盘支撑 滚动型 等3件商品</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <ellipse cx="38" cy="15" rx="17" ry="5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <rect x="34" y="15" width="8" height="23" fill="url(#steelH)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="38" cy="42" r="7.5" fill="url(#steelR)" stroke="#98A3B2" stroke-width=".6"/>
+            <circle cx="38" cy="42" r="2.6" fill="url(#boreR)"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p>3件商品，合计：<b>1236.00元</b></p>
+          <p>订单状态：已签收</p>
+          <p>下单时间：2026-03-12 12:20:43</p>
+        </div>
+      </div>
+      <div class="o-act">
+        <button class="btn btn-p" type="button">发送</button>
+        <button class="btn btn-s" type="button">创建工单</button>
+      </div>
+    </article>
+
+    <a class="more" href="https://www.zhichi.com/" target="_blank" rel="noopener">更多历史订单...</a>
+  </section>
+
+  <!-- ============ 推荐商品 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">推荐商品：</h2>
+
+    <article class="card rec">
+      <p class="r-name">机构安装组件 底座/立柱/锁块/加强块</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <rect x="8" y="34" width="26" height="7" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="15" cy="37.5" r="1.6" fill="url(#boreR)"/>
+            <circle cx="27" cy="37.5" r="1.6" fill="url(#boreR)"/>
+            <rect x="18" y="14" width="6" height="20" rx="1" fill="url(#steelH)" stroke="#B6BFCB" stroke-width=".6"/>
+            <rect x="40" y="30" width="14" height="11" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="47" cy="35.5" r="2.4" fill="url(#boreR)"/>
+            <path d="M58 41 L70 41 L70 29 Z" fill="url(#steelR)" stroke="#B6BFCB" stroke-width=".6"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">型号 HBLTS6 ｜ 铝合金 ｜ 3天发货</p>
+          <p class="g-price">286.50元</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">便捷可调式转盘支撑 滚动型</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <ellipse cx="38" cy="15" rx="17" ry="5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <rect x="34" y="15" width="8" height="23" fill="url(#steelH)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="38" cy="42" r="7.5" fill="url(#steelR)" stroke="#98A3B2" stroke-width=".6"/>
+            <circle cx="38" cy="42" r="2.6" fill="url(#boreR)"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">型号 HRT40R ｜ 承重 50kg ｜ 3天发货</p>
+          <p class="g-price">412.00元</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">布线管</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <rect x="35" y="10" width="6" height="36" fill="#3A4150"/>
+            <rect x="32" y="4" width="12" height="8" rx="2" fill="#8B96A5"/>
+            <rect x="32" y="44" width="12" height="8" rx="2" fill="#8B96A5"/>
+            <rect x="35.5" y="12" width="1.6" height="32" fill="#5A6473"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">型号 CB10 ｜ 内径 φ10 ｜ 1m/根</p>
+          <p class="g-price">38.60元</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">机构安装组件 平行锁块/双孔底座/双孔锁块</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#F7F9FB"/>
+            <rect x="8" y="10" width="22" height="10" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="14" cy="15" r="2" fill="url(#boreR)"/>
+            <circle cx="24" cy="15" r="2" fill="url(#boreR)"/>
+            <rect x="38" y="8" width="28" height="14" rx="2" fill="url(#steelH)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="46" cy="15" r="2.6" fill="url(#boreR)"/>
+            <circle cx="58" cy="15" r="2.6" fill="url(#boreR)"/>
+            <rect x="12" y="32" width="18" height="12" rx="1.5" fill="url(#steelV)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="21" cy="38" r="2.4" fill="url(#boreR)"/>
+            <rect x="44" y="32" width="18" height="12" rx="1.5" fill="url(#steelR)" stroke="#B6BFCB" stroke-width=".6"/>
+            <circle cx="53" cy="38" r="2.4" fill="url(#boreR)"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">型号 HBLF8 ｜ 铝合金 ｜ 3天发货</p>
+          <p class="g-price">318.00元</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+  </section>
+
+</div>
+
+</body>
+</html>
