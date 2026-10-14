@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>天元宠物 · 客服侧边栏 会员信息/历史订单/推荐商品（嵌入版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  color-scheme:light;
+  --brand:#DC9636;
+  --brand-d:#B87A22;
+  --brand-l:#FBEBD3;
+  --navy:#20456F;
+  --navy-d:#16314F;
+  --mint:#2FA98C;
+  --coral:#F2795C;
+  --ink:#2A2117;
+  --ink-2:#6B5B49;
+  --ink-3:#9C8B77;
+  --line:#EFE2CE;
+  --line-2:#F6EDE0;
+  --card:#FFFFFF;
+  --thumb:#FDF6EC;
+  --font-display:'Nunito','Noto Sans SC',system-ui,sans-serif;
+  --font-body:'Noto Sans SC','Nunito',system-ui,sans-serif;
+}
+
+html,body{margin:0;padding:0}
+body{
+  background:#FFFFFF;
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ================= 面板本体（无外壳，靠左） ================= */
+.panel{
+  width:100%;
+  max-width:360px;
+  margin:0;
+  padding:14px 14px 18px;
+  background:#FFF;
+  font-family:var(--font-body);
+  color:var(--ink);
+  font-synthesis-weight:none;
+}
+
+.sec + .sec{margin-top:20px}
+.sec-t{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  font-size:15px;
+  font-weight:700;
+  color:var(--ink);
+  margin:0 0 11px;
+  letter-spacing:.02em;
+}
+.sec-t::before{
+  content:"";
+  flex:none;
+  width:4px;
+  height:15px;
+  border-radius:2px;
+  background:linear-gradient(180deg,#E9A63C,#B87A22);
+}
+
+/* ---- 会员信息 ---- */
+.info{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px 10px;
+  margin:0;
+}
+.info .kv{display:flex;align-items:baseline;min-width:0}
+.info dt{flex:none;font-size:12.5px;color:var(--ink-3);letter-spacing:.01em}
+.info dd{margin:0 0 0 2px;font-size:12.5px;color:var(--ink-2);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.info dd.hl{color:var(--brand-d);font-weight:700}
+
+.more{
+  display:block;text-align:right;
+  font-size:12.5px;color:var(--brand-d);text-decoration:none;
+  margin-top:11px;
+}
+.more:hover{text-decoration:underline}
+
+/* ---- 订单 / 商品卡 ---- */
+.card{
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:var(--card);
+  padding:11px 12px 12px;
+}
+.card + .card{margin-top:10px}
+
+.o-no{font-size:12.5px;color:var(--ink-2);margin:0 0 5px}
+.o-title{font-size:13px;color:var(--ink);margin:0 0 9px;line-height:1.5}
+
+.o-body{display:flex;gap:10px;align-items:flex-start}
+.o-thumb{
+  flex:none;width:76px;height:56px;
+  border:1px solid var(--line-2);border-radius:8px;
+  background:var(--thumb);overflow:hidden;
+}
+.o-thumb svg{display:block;width:100%;height:100%}
+
+.o-meta{flex:1;min-width:0}
+.o-meta p{margin:0 0 3px;font-size:12.5px;color:var(--ink-3);line-height:1.55}
+.o-meta p:last-child{margin-bottom:0}
+.o-meta b{color:var(--brand-d);font-weight:700}
+
+.state{color:var(--mint);font-weight:700}
+.state.done{color:var(--ink-3);font-weight:400}
+
+.g-spec{font-size:12px;color:var(--ink-3);margin:0 0 6px;line-height:1.5}
+.g-price{font-size:14px;font-weight:800;color:var(--brand-d);margin:0;font-family:var(--font-display)}
+
+/* ---- 按钮 ---- */
+.o-act{display:flex;justify-content:flex-end;gap:8px;margin-top:11px}
+.btn{
+  font-family:var(--font-body);
+  font-size:12.5px;font-weight:700;
+  line-height:1;
+  padding:8px 16px;
+  border-radius:8px;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:background .15s ease,border-color .15s ease,box-shadow .15s ease;
+}
+.btn-p{
+  background:linear-gradient(180deg,#EDA94A,#DC9636);
+  border-color:#C4831F;
+  color:#3E2B0D;
+  box-shadow:0 2px 0 #C4831F;
+}
+.btn-p:hover{background:linear-gradient(180deg,#E9A03C,#CE8B2B)}
+.btn-s{background:#FFF;border-color:#E3B871;color:var(--brand-d)}
+.btn-s:hover{background:#FDF6E9;border-color:var(--brand-d)}
+
+/* ---- 推荐商品 ---- */
+.rec .o-body{align-items:flex-start}
+.rec .o-meta p{margin-bottom:6px}
+.r-name{font-size:13px;font-weight:700;color:var(--ink);margin:0 0 8px;line-height:1.5}
+
+/* ---- 可选：编辑态（仅 ?edit=1 时出现，嵌入时不受影响） ---- */
+.edit-bar{
+  position:fixed;right:14px;bottom:14px;z-index:99;
+  display:none;
+  font-family:var(--font-body);font-size:12.5px;font-weight:700;
+  padding:9px 15px;border-radius:999px;border:0;cursor:pointer;
+  background:#20456F;color:#FFF;
+  box-shadow:0 8px 20px -8px rgba(32,69,111,.7);
+}
+body.editing .edit-bar{display:block}
+body.edit-on #panel{outline:2px dashed #DC9636;outline-offset:4px;border-radius:6px}
+body.edit-on #panel :focus{outline:2px dashed #2FA98C;outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="rugS" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7ECDA"/>
+      <stop offset="1" stop-color="#E0CDAC"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="panel" id="panel">
+
+  <!-- ============ 会员信息 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">会员信息：</h2>
+    <dl class="info">
+      <div class="kv"><dt>会员编号：</dt><dd>PS000872</dd></div>
+      <div class="kv"><dt>会员等级：</dt><dd class="hl">金卡会员</dd></div>
+      <div class="kv"><dt>昵称：</dt><dd>Lily</dd></div>
+      <div class="kv"><dt>国家/地区：</dt><dd>美国</dd></div>
+      <div class="kv"><dt>语言偏好：</dt><dd>英语</dd></div>
+      <div class="kv"><dt>注册时间：</dt><dd>2 年</dd></div>
+      <div class="kv"><dt>累计消费：</dt><dd class="hl">$1,286.40</dd></div>
+      <div class="kv"><dt>可用积分：</dt><dd>3,420</dd></div>
+      <div class="kv"><dt>优惠券：</dt><dd>2 张</dd></div>
+      <div class="kv"><dt>常用收货地：</dt><dd>加利福尼亚州</dd></div>
+    </dl>
+    <a class="more" href="https://www.tianyuanpet.com/" target="_blank" rel="noopener">查看更多...</a>
+  </section>
+
+  <!-- ============ 历史订单 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">历史订单：</h2>
+
+    <article class="card">
+      <p class="o-no">订单编号：PS2609280417</p>
+      <p class="o-title">实木多层猫爬架 加大底座款 等 2 件商品</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="51" rx="34" ry="3.6" fill="#EADCC6"/>
+            <rect x="8" y="45" width="32" height="6" rx="2.5" fill="#C4831F"/>
+            <rect x="20" y="18" width="6" height="27" fill="url(#rugS)"/>
+            <rect x="6" y="12" width="34" height="6" rx="2.5" fill="url(#rugS)"/>
+            <rect x="6" y="12" width="34" height="2.4" rx="1.2" fill="#FBF3E4"/>
+            <rect x="24" y="31" width="22" height="5" rx="2" fill="url(#rugS)"/>
+            <rect x="24" y="31" width="22" height="2" rx="1" fill="#FBF3E4"/>
+            <line x1="12" y1="18" x2="12" y2="26" stroke="#C7AE86" stroke-width="1.6"/>
+            <circle cx="12" cy="30" r="4.2" fill="#F2795C"/>
+            <g fill="#8A6A45">
+              <path d="M54 50 C46 50 42 45 42 39 C42 31 47.5 26 54 26 C60.5 26 66 31 66 39 C66 45 62 50 54 50 Z"/>
+              <path d="M43.5 31 L41 21 L50 26 Z"/>
+              <path d="M64.5 31 L67 21 L58 26 Z"/>
+            </g>
+            <circle cx="50" cy="37" r="1.8" fill="#FFF6E6"/>
+            <circle cx="58" cy="37" r="1.8" fill="#FFF6E6"/>
+            <path d="M66 45 C73 46 75.5 39 73 33" fill="none" stroke="#8A6A45" stroke-width="3.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p>2 件商品，合计：<b>$189.00</b></p>
+          <p>订单状态：<span class="state">运输中</span></p>
+          <p>下单时间：2026-09-28 10:24:31</p>
+        </div>
+      </div>
+      <div class="o-act">
+        <button class="btn btn-p" type="button">发送</button>
+        <button class="btn btn-s" type="button">创建工单</button>
+      </div>
+    </article>
+
+    <article class="card">
+      <p class="o-no">订单编号：PS2607140093</p>
+      <p class="o-title">凉感冰丝宠物窝垫 可拆洗 等 1 件商品</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="48" rx="30" ry="4" fill="#EADCC6"/>
+            <path d="M8 30 C8 46 22 53 38 53 C54 53 68 46 68 30 Z" fill="#DC9636"/>
+            <ellipse cx="38" cy="30" rx="30" ry="10" fill="#E9A445"/>
+            <ellipse cx="38" cy="30" rx="21" ry="6.2" fill="#FFF3DE"/>
+            <path d="M8 30 C8 46 22 53 38 53 C54 53 68 46 68 30" fill="none" stroke="#B87A22" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p>1 件商品，合计：<b>$45.90</b></p>
+          <p>订单状态：<span class="state done">已签收</span></p>
+          <p>下单时间：2026-07-14 21:08:12</p>
+        </div>
+      </div>
+      <div class="o-act">
+        <button class="btn btn-p" type="button">发送</button>
+        <button class="btn btn-s" type="button">创建工单</button>
+      </div>
+    </article>
+
+    <a class="more" href="https://www.tianyuanpet.com/" target="_blank" rel="noopener">更多历史订单...</a>
+  </section>
+
+  <!-- ============ 推荐商品 ============ -->
+  <section class="sec">
+    <h2 class="sec-t">推荐商品：</h2>
+
+    <article class="card rec">
+      <p class="r-name">实木多层猫爬架 加大底座款</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="51" rx="34" ry="3.6" fill="#EADCC6"/>
+            <rect x="8" y="45" width="32" height="6" rx="2.5" fill="#C4831F"/>
+            <rect x="20" y="18" width="6" height="27" fill="url(#rugS)"/>
+            <rect x="6" y="12" width="34" height="6" rx="2.5" fill="url(#rugS)"/>
+            <rect x="6" y="12" width="34" height="2.4" rx="1.2" fill="#FBF3E4"/>
+            <rect x="24" y="31" width="22" height="5" rx="2" fill="url(#rugS)"/>
+            <rect x="24" y="31" width="22" height="2" rx="1" fill="#FBF3E4"/>
+            <line x1="12" y1="18" x2="12" y2="26" stroke="#C7AE86" stroke-width="1.6"/>
+            <circle cx="12" cy="30" r="4.2" fill="#F2795C"/>
+            <g fill="#8A6A45">
+              <path d="M54 50 C46 50 42 45 42 39 C42 31 47.5 26 54 26 C60.5 26 66 31 66 39 C66 45 62 50 54 50 Z"/>
+              <path d="M43.5 31 L41 21 L50 26 Z"/>
+              <path d="M64.5 31 L67 21 L58 26 Z"/>
+            </g>
+            <circle cx="50" cy="37" r="1.8" fill="#FFF6E6"/>
+            <circle cx="58" cy="37" r="1.8" fill="#FFF6E6"/>
+            <path d="M66 45 C73 46 75.5 39 73 33" fill="none" stroke="#8A6A45" stroke-width="3.4" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">实木 ｜ 高 178cm</p>
+          <p class="g-price">$129.00</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">凉感冰丝宠物窝垫 可拆洗</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="48" rx="30" ry="4" fill="#EADCC6"/>
+            <path d="M8 30 C8 46 22 53 38 53 C54 53 68 46 68 30 Z" fill="#DC9636"/>
+            <ellipse cx="38" cy="30" rx="30" ry="10" fill="#E9A445"/>
+            <ellipse cx="38" cy="30" rx="21" ry="6.2" fill="#FFF3DE"/>
+            <path d="M8 30 C8 46 22 53 38 53 C54 53 68 46 68 30" fill="none" stroke="#B87A22" stroke-width="2.4"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">60×50cm ｜ 可机洗</p>
+          <p class="g-price">$45.90</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">折叠金属宠物围栏 八片装</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="50" rx="28" ry="3.5" fill="#EADCC6"/>
+            <g fill="#FFF6E6" stroke="#DC9636" stroke-width="2.2" stroke-linejoin="round">
+              <rect x="8" y="14" width="19" height="32" rx="3.5"/>
+              <rect x="28.5" y="14" width="19" height="32" rx="3.5"/>
+              <rect x="49" y="14" width="19" height="32" rx="3.5"/>
+            </g>
+            <g stroke="#E9A445" stroke-width="1.6" stroke-linecap="round">
+              <path d="M17.5 17 L17.5 43"/>
+              <path d="M38 17 L38 43"/>
+              <path d="M58.5 17 L58.5 43"/>
+              <path d="M10 25 L25 25"/>
+              <path d="M30.5 25 L45.5 25"/>
+              <path d="M51 25 L66 25"/>
+            </g>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">单高 60cm ｜ 八片装</p>
+          <p class="g-price">$89.00</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+
+    <article class="card rec">
+      <p class="r-name">智能循环宠物饮水机 2.5L</p>
+      <div class="o-body">
+        <div class="o-thumb">
+          <svg viewBox="0 0 76 56" aria-hidden="true">
+            <rect width="76" height="56" fill="#FDF6EC"/>
+            <ellipse cx="38" cy="50" rx="24" ry="3.5" fill="#EADCC6"/>
+            <rect x="34" y="6" width="8" height="12" rx="3.5" fill="#C4831F"/>
+            <path d="M16 24 C16 42 25 49 38 49 C51 49 60 42 60 24 Z" fill="#DC9636"/>
+            <ellipse cx="38" cy="24" rx="22" ry="7" fill="#E9A445"/>
+            <ellipse cx="38" cy="24" rx="15" ry="4.4" fill="#7ECBB4"/>
+            <path d="M38 18 L38 25" stroke="#7ECBB4" stroke-width="2.6" stroke-linecap="round"/>
+            <ellipse cx="38" cy="24" rx="22" ry="7" fill="none" stroke="#B87A22" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <div class="o-meta">
+          <p class="g-spec">2.5L ｜ 静音</p>
+          <p class="g-price">$39.90</p>
+        </div>
+        <button class="btn btn-p" type="button">发送商品</button>
+      </div>
+    </article>
+  </section>
+
+</div>
+
+<script>
+(function(){
+  /* 可选编辑态：访问时加 ?edit=1 才出现按钮；作为 iframe 嵌入时完全不受影响 */
+  if (!/[?&]edit=1/.test(location.search)) return;
+  document.body.classList.add('editing');
+  var b = document.createElement('button');
+  b.type = 'button';
+  b.className = 'edit-bar';
+  b.textContent = '✎ 可编辑';
+  b.addEventListener('click', function(){
+    var on = document.body.classList.toggle('edit-on');
+    document.getElementById('panel').setAttribute('contenteditable', on ? 'true' : 'false');
+    b.textContent = on ? '✓ 编辑中（点击退出）' : '✎ 可编辑';
+  });
+  document.body.appendChild(b);
+})();
+</script>
+
+</body>
+</html>

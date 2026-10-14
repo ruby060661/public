@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>天元宠物 · 客服侧边栏活动位（嵌入版）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+
+:root{
+  color-scheme:light;
+  --brand:#DC9636;
+  --brand-d:#B87A22;
+  --brand-l:#FBEBD3;
+  --navy:#20456F;
+  --navy-d:#16314F;
+  --navy-l:#2E5E92;
+  --mint:#2FA98C;
+  --coral:#F2795C;
+  --cream:#FFF9F1;
+  --cream-2:#FDF1DF;
+  --ink:#2A2117;
+  --ink-2:#6B5B49;
+  --ink-3:#9C8B77;
+  --line:#EFE2CE;
+  --font-display:'Nunito','Noto Sans SC',system-ui,sans-serif;
+  --font-body:'Noto Sans SC','Nunito',system-ui,sans-serif;
+}
+
+html,body{margin:0;padding:0}
+body{
+  background:#FFFFFF;
+  color:var(--ink);
+  font-family:var(--font-body);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ============ 访客端侧边栏活动位 · 宽 360 · 高自适应 ============ */
+
+.panel{
+  --p-ink:#2A2117;
+  --p-ink-2:#6B5B49;
+  --p-ink-3:#9C8B77;
+  --p-navy:#20456F;
+  --p-navy-d:#16314F;
+  --p-navy-l:#2E5E92;
+  --p-amber:#DC9636;
+  --p-amber-d:#B87A22;
+  --p-amber-l:#FBEBD3;
+  --p-mint:#2FA98C;
+  --p-coral:#F2795C;
+  --p-cream:#FFF9F1;
+  --p-cream-2:#FDF1DF;
+  --p-line:#EFE2CE;
+  --p-white:#FFFFFF;
+
+  width:100%;
+  max-width:360px;
+  margin:0 auto;
+  display:flex;
+  flex-direction:column;
+  padding:12px;
+  gap:10px;
+  background:var(--p-white);
+  color:var(--p-ink);
+  font-family:var(--font-body);
+  font-synthesis-weight:none;
+}
+
+.p-body{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* ---- 通用 banner ---- */
+.bn{
+  position:relative;
+  display:block;
+  flex:none;
+  border-radius:14px;
+  overflow:hidden;
+  text-decoration:none;
+  color:inherit;
+  isolation:isolate;
+  transition:transform .18s ease,box-shadow .18s ease;
+}
+.bn:hover{transform:translateY(-2px);box-shadow:0 12px 26px -12px rgba(42,33,23,.42)}
+.bn:focus-visible{outline:2px solid var(--p-amber);outline-offset:2px}
+.bn-a{height:138px}
+.bn-b{height:200px}
+.bn-c{height:214px}
+
+/* ---- A：海外仓现货（雾蓝主视觉） ---- */
+.bn-a{
+  background:linear-gradient(112deg,#2C5C8E 0%,#1D4270 56%,#122C4A 100%);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  padding:0 15px;
+}
+.a-paw{
+  position:absolute;
+  top:-16px;right:-14px;
+  width:106px;height:106px;
+  z-index:0;
+  opacity:.11;
+  pointer-events:none;
+  transform:rotate(16deg);
+}
+.a-left{position:relative;z-index:1;flex:0 1 auto;min-width:0;max-width:132px}
+.a-cap{
+  display:block;
+  font-size:11px;
+  letter-spacing:.06em;
+  color:#A9C6EC;
+  margin-bottom:8px;
+}
+.a-l1{
+  display:block;
+  font-size:21px;
+  font-weight:700;
+  color:var(--p-white);
+  letter-spacing:.05em;
+  line-height:1.15;
+  white-space:nowrap;
+  margin-bottom:11px;
+}
+.a-pill{
+  display:inline-flex;
+  align-items:center;
+  background:var(--p-white);
+  color:var(--p-navy);
+  font-size:12px;
+  font-weight:700;
+  padding:7px 13px;
+  border-radius:999px;
+  white-space:nowrap;
+}
+.a-right{
+  position:relative;
+  z-index:1;
+  flex:1;
+  min-width:0;
+  text-align:right;
+}
+.a-l2{
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+  gap:4px;
+}
+.a-l2 .t{
+  font-size:12.5px;
+  font-weight:700;
+  color:#CFE0F8;
+  line-height:1;
+  padding-bottom:9px;
+  white-space:nowrap;
+}
+.a-l2 .n{
+  font-family:var(--font-display);
+  font-weight:900;
+  font-size:56px;
+  line-height:.8;
+  color:#F7C96E;
+  letter-spacing:-.02em;
+}
+.a-l2 .u{
+  font-size:26px;
+  font-weight:800;
+  color:#F7C96E;
+  line-height:1;
+  padding-bottom:5px;
+  padding-right:2px;
+}
+
+/* ---- B：2026 新品图册 ---- */
+.bn-b{
+  background:
+    radial-gradient(circle at 12px 12px,#F2E3CA 1.5px,transparent 1.6px) 0 0/22px 22px,
+    linear-gradient(158deg,#FFFDF9 0%,#FDF4E6 54%,#F9E9D2 100%);
+  padding:13px;
+}
+.b-top{
+  position:relative;
+  z-index:2;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  max-width:222px;
+}
+.b-mark{width:38px;height:38px;flex:none}
+.b-title{
+  display:block;
+  font-size:17px;
+  font-weight:700;
+  letter-spacing:.02em;
+  line-height:1.2;
+  white-space:nowrap;
+  color:#2A2117;
+}
+.b-sub{display:block;font-size:11px;color:var(--p-ink-2);margin-top:4px;white-space:nowrap}
+.b-btn{
+  position:relative;
+  z-index:2;
+  display:block;
+  width:156px;
+  margin:13px auto 0;
+  text-align:center;
+  background:linear-gradient(180deg,#F7CC7A,#E9A63C);
+  color:#4A3413;
+  font-size:13px;
+  font-weight:700;
+  padding:9px 0;
+  border-radius:8px;
+  box-shadow:0 2px 0 #C4831F,0 8px 14px -8px rgba(150,100,20,.65);
+}
+.b-star{
+  position:absolute;
+  top:9px;right:9px;
+  width:48px;height:48px;
+  z-index:3;
+  display:grid;
+  place-items:center;
+}
+.b-star span{
+  position:relative;
+  font-size:11px;
+  font-weight:700;
+  color:var(--p-white);
+  letter-spacing:.04em;
+}
+
+.b-parts{position:absolute;inset:0;z-index:1;pointer-events:none}
+.part{position:absolute;filter:drop-shadow(0 6px 8px rgba(42,33,23,.14))}
+.pt-ball{left:14px;bottom:13px;width:44px;height:44px}
+.pt-bowl{left:66px;bottom:11px;width:56px;height:40px}
+.pt-bed{left:124px;bottom:14px;width:76px;height:52px}
+.pt-tree{right:6px;bottom:8px;width:72px;height:92px}
+
+/* ---- C：春季焕新 · 猫家具 ---- */
+.bn-c{
+  background:
+    radial-gradient(130% 100% at 96% 94%,#E4F2E7 0%,rgba(228,242,231,0) 58%),
+    linear-gradient(118deg,#FFFDF8 0%,#FCF3E4 48%,#F6E6CE 100%);
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+}
+.bn-c::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  background:linear-gradient(96deg,#FFFDF8 0%,rgba(255,253,248,.96) 34%,rgba(255,253,248,0) 62%);
+  pointer-events:none;
+}
+.c-plinth{
+  position:absolute;
+  right:-26px;bottom:-34px;
+  width:236px;height:152px;
+  background:radial-gradient(closest-side,#E6D2AE 0%,rgba(230,210,174,0) 76%);
+  z-index:0;
+}
+.c-plinth::after{content:none}
+.c-hero{
+  position:absolute;
+  right:-4px;bottom:-4px;
+  width:170px;height:180px;
+  z-index:1;
+  filter:drop-shadow(-6px 10px 16px rgba(90,66,30,.2));
+}
+.c-body{position:relative;z-index:3;max-width:166px}
+.c-title{
+  display:block;
+  font-size:31px;
+  font-weight:900;
+  line-height:1.08;
+  letter-spacing:.04em;
+  color:#2A2117;
+  white-space:nowrap;
+  text-shadow:0 1px 0 rgba(255,255,255,.85);
+}
+.c-bar{
+  display:inline-flex;
+  align-items:stretch;
+  margin-top:13px;
+  border-radius:8px;
+  overflow:hidden;
+  box-shadow:0 6px 12px -7px rgba(32,69,111,.6);
+}
+.c-bar .txt{
+  background:var(--p-navy);
+  color:var(--p-white);
+  font-size:12.5px;
+  font-weight:700;
+  padding:8px 11px;
+  white-space:nowrap;
+}
+.c-bar .tag{
+  background:linear-gradient(180deg,#F7CC7A,#E9A63C);
+  color:#4A3413;
+  font-size:10.5px;
+  font-weight:700;
+  line-height:1.15;
+  padding:4px 8px;
+  display:flex;
+  align-items:center;
+  text-align:center;
+}
+.c-sub{
+  display:block;
+  max-width:150px;
+  margin-top:13px;
+  font-size:11px;
+  line-height:1.65;
+  color:#5C4B36;
+  letter-spacing:.01em;
+}
+
+/* ---- 优惠券条 ---- */
+.p-coupon{
+  flex:none;
+  height:62px;
+  display:flex;
+  gap:8px;
+}
+.cp{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:2px;
+  border:1px dashed #E3B871;
+  border-radius:10px;
+  background:linear-gradient(180deg,#FFFDF7,#FDF2DF);
+  text-align:center;
+}
+.cp b{
+  font-family:var(--font-display);
+  font-size:19px;
+  font-weight:800;
+  color:#B87A22;
+  line-height:1;
+  letter-spacing:-.01em;
+}
+.cp span{font-size:10.5px;color:#93805F}
+
+/* ---- 可选：编辑态（仅 ?edit=1 时出现，嵌入时不受影响） ---- */
+.edit-bar{
+  position:fixed;right:14px;bottom:14px;z-index:99;
+  display:none;
+  font-family:var(--font-body);font-size:12.5px;font-weight:700;
+  padding:9px 15px;border-radius:999px;border:0;cursor:pointer;
+  background:#20456F;color:#FFF;
+  box-shadow:0 8px 20px -8px rgba(32,69,111,.7);
+}
+body.editing .edit-bar{display:block}
+body.edit-on #panel{outline:2px dashed #DC9636;outline-offset:4px;border-radius:6px}
+body.edit-on #panel :focus{outline:2px dashed #2FA98C;outline-offset:2px}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <linearGradient id="wood" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#E9A445"/>
+      <stop offset="1" stop-color="#C4831F"/>
+    </linearGradient>
+    <linearGradient id="rug" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F7ECDA"/>
+      <stop offset="1" stop-color="#E0CDAC"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="panel" id="panel">
+
+  <div class="p-body">
+
+    <!-- A · 海外仓现货 -->
+    <a class="bn bn-a" href="https://www.tianyuanpet.com/" target="_blank" rel="noopener" aria-label="海外仓现货，美国欧洲日本三大仓区就近发货">
+      <span class="a-paw" data-part="paw"></span>
+      <span class="a-left">
+        <span class="a-cap">美国 · 欧洲 · 日本</span>
+        <span class="a-l1">海外仓现货</span>
+        <span class="a-pill">详情请点击 ››</span>
+      </span>
+      <span class="a-right">
+        <span class="a-l2">
+          <span class="t">就近发货</span>
+          <span class="n">3</span>
+          <span class="u">仓</span>
+        </span>
+      </span>
+    </a>
+
+    <!-- B · 2026 新品图册 -->
+    <a class="bn bn-b" href="https://www.tianyuanpet.com/" target="_blank" rel="noopener" aria-label="免费下载 2026 新品图册">
+      <span class="b-star" data-part="burst"><span>免费</span></span>
+      <span class="b-top">
+        <span class="b-mark" data-part="album"></span>
+        <span>
+          <span class="b-title">2026 新品图册</span>
+          <span class="b-sub">猫家具 · 窝垫 · 笼具围栏 · 玩具</span>
+        </span>
+      </span>
+      <span class="b-btn">免费下载电子图册</span>
+      <span class="b-parts">
+        <span class="part pt-ball" data-part="ball"></span>
+        <span class="part pt-bowl" data-part="bowl"></span>
+        <span class="part pt-bed" data-part="bed"></span>
+        <span class="part pt-tree" data-part="tree"></span>
+      </span>
+    </a>
+
+    <!-- C · 春季焕新 · 猫家具专场 -->
+    <a class="bn bn-c" href="https://www.tianyuanpet.com/" target="_blank" rel="noopener" aria-label="春季焕新，猫家具专场限时特卖">
+      <span class="c-plinth"></span>
+      <span class="c-hero" data-part="hero"></span>
+      <span class="c-body">
+        <span class="c-title">春季焕新</span>
+        <span class="c-bar">
+          <span class="txt">猫家具专场</span>
+          <span class="tag">限时<br>特卖</span>
+        </span>
+        <span class="c-sub">实木猫爬架 · 猫窝 · 猫抓板<br>环保板材，现货直发</span>
+      </span>
+    </a>
+
+    <div class="p-coupon">
+      <div class="cp"><b>$10</b><span>满 $99 可用</span></div>
+      <div class="cp"><b>9折</b><span>新人首单</span></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var NS = 'http://www.w3.org/2000/svg';
+
+  function mk(tag, attrs, parent){
+    var n = document.createElementNS(NS, tag);
+    for (var k in attrs) n.setAttribute(k, attrs[k]);
+    if (parent) parent.appendChild(n);
+    return n;
+  }
+  function box(vb){
+    return mk('svg', {viewBox: vb, width:'100%', height:'100%', fill:'none'});
+  }
+
+  /* 猫爪（A 位水印） */
+  function paw(){
+    var s = box('0 0 100 100');
+    mk('ellipse', {cx:50, cy:68, rx:25, ry:20, fill:'#FFFFFF'}, s);
+    mk('ellipse', {cx:20, cy:42, rx:9.5, ry:12.5, fill:'#FFFFFF', transform:'rotate(-24 20 42)'}, s);
+    mk('ellipse', {cx:40, cy:28, rx:9.5, ry:13,   fill:'#FFFFFF', transform:'rotate(-9 40 28)'}, s);
+    mk('ellipse', {cx:61, cy:28, rx:9.5, ry:13,   fill:'#FFFFFF', transform:'rotate(9 61 28)'}, s);
+    mk('ellipse', {cx:81, cy:43, rx:9.5, ry:12.5, fill:'#FFFFFF', transform:'rotate(24 81 43)'}, s);
+    return s;
+  }
+
+  /* 图册（B 位标识） */
+  function album(){
+    var s = box('0 0 100 100');
+    mk('rect', {x:16, y:10, width:70, height:80, rx:10, fill:'#B87A22'}, s);
+    mk('rect', {x:22, y:16, width:64, height:74, rx:8,  fill:'#FFFFFF'}, s);
+    mk('rect', {x:22, y:16, width:11, height:74, rx:5,  fill:'#FBEBD3'}, s);
+    mk('circle', {cx:60, cy:58, r:14,   fill:'#DC9636'}, s);
+    mk('circle', {cx:47, cy:42, r:5.4,  fill:'#DC9636'}, s);
+    mk('circle', {cx:60, cy:37, r:5.4,  fill:'#DC9636'}, s);
+    mk('circle', {cx:73, cy:42, r:5.4,  fill:'#DC9636'}, s);
+    return s;
+  }
+
+  /* 免费爆炸贴（B 位角标） */
+  function burst(){
+    var s = box('0 0 100 100'), d = '', i, rad, a, n = 12, R = 49, r = 36;
+    for (i = 0; i < n * 2; i++){
+      rad = (i % 2) ? r : R;
+      a = i * Math.PI / n - Math.PI / 2;
+      d += (i ? 'L' : 'M') + (50 + Math.cos(a) * rad).toFixed(1) + ' ' + (50 + Math.sin(a) * rad).toFixed(1);
+    }
+    mk('path', {d:d + 'Z', fill:'#F2795C'}, s);
+    return s;
+  }
+
+  /* 逗猫球 */
+  function ball(){
+    var s = box('0 0 100 100');
+    mk('circle', {cx:50, cy:52, r:44, fill:'#E9A445'}, s);
+    mk('path', {d:'M6 52 a44 44 0 0 1 88 0 Z', fill:'#F7CC7A'}, s);
+    mk('circle', {cx:50, cy:52, r:15, fill:'#FFF6E6'}, s);
+    mk('circle', {cx:50, cy:52, r:7.5, fill:'#DC9636'}, s);
+    mk('path', {d:'M6 52 a44 44 0 0 0 88 0', fill:'none', stroke:'#C4831F', 'stroke-width':3.5}, s);
+    return s;
+  }
+
+  /* 宠物食盆 */
+  function bowl(){
+    var s = box('0 0 100 70');
+    mk('path', {d:'M8 22 C8 50 25 64 50 64 C75 64 92 50 92 22 Z', fill:'#DC9636'}, s);
+    mk('ellipse', {cx:50, cy:22, rx:42, ry:12, fill:'#F7CC7A'}, s);
+    mk('ellipse', {cx:50, cy:22, rx:31, ry:7.5, fill:'#FFF6E6'}, s);
+    mk('path', {d:'M8 22 C8 50 25 64 50 64 C75 64 92 50 92 22', fill:'none', stroke:'#B87A22', 'stroke-width':3.5}, s);
+    return s;
+  }
+
+  /* 宠物窝垫 */
+  function bed(){
+    var s = box('0 0 120 80');
+    mk('path', {d:'M8 40 C8 66 30 76 60 76 C90 76 112 66 112 40 Z', fill:'#DC9636'}, s);
+    mk('ellipse', {cx:60, cy:40, rx:52, ry:17, fill:'#E9A445'}, s);
+    mk('ellipse', {cx:60, cy:40, rx:38, ry:11, fill:'#FFF3DE'}, s);
+    mk('path', {d:'M8 40 C8 66 30 76 60 76 C90 76 112 66 112 40', fill:'none', stroke:'#B87A22', 'stroke-width':3.5}, s);
+    return s;
+  }
+
+  /* 猫爬架 + 猫（B 位小图） */
+  function tree(){
+    var s = box('0 0 90 120'), g;
+    mk('ellipse', {cx:45, cy:112, rx:34, ry:5, fill:'#EADCC6'}, s);
+    mk('rect', {x:22, y:100, width:46, height:12, rx:5,   fill:'#C4831F'}, s);
+    mk('rect', {x:22, y:100, width:46, height:4.5, rx:2.2, fill:'#DC9636'}, s);
+    mk('rect', {x:40, y:44, width:10, height:58, rx:3.5, fill:'url(#rug)'}, s);
+    mk('rect', {x:16, y:36, width:58, height:10, rx:4, fill:'url(#rug)'}, s);
+    mk('rect', {x:16, y:36, width:58, height:4,  rx:2, fill:'#FBF3E4'}, s);
+    mk('rect', {x:50, y:78, width:32, height:9, rx:3.5, fill:'url(#rug)'}, s);
+    mk('rect', {x:50, y:78, width:32, height:3.5, rx:1.8, fill:'#FBF3E4'}, s);
+    mk('line', {x1:33, y1:46, x2:33, y2:58, stroke:'#C7AE86', 'stroke-width':2}, s);
+    mk('circle', {cx:33, cy:65, r:7, fill:'#F2795C'}, s);
+    g = mk('g', {transform:'translate(58 36)'}, s);
+    mk('path', {d:'M0 0 C-9 0 -13 -6 -13 -13 C-13 -22 -7 -27 0 -27 C7 -27 13 -22 13 -13 C13 -6 9 0 0 0 Z', fill:'#8A6A45'}, g);
+    mk('path', {d:'M-11.5 -21 L-14.5 -32 L-4 -27 Z', fill:'#8A6A45'}, g);
+    mk('path', {d:'M11.5 -21 L14.5 -32 L4 -27 Z', fill:'#8A6A45'}, g);
+    mk('circle', {cx:-4.6, cy:-16, r:1.7, fill:'#FFF6E6'}, g);
+    mk('circle', {cx:4.6, cy:-16, r:1.7, fill:'#FFF6E6'}, g);
+    mk('path', {d:'M12 -3 C21 -2 24 -10 20 -16', stroke:'#8A6A45', 'stroke-width':5, 'stroke-linecap':'round'}, g);
+    return s;
+  }
+
+  /* 春季焕新主视觉：猫爬架 + 猫 + 春叶 */
+  function hero(){
+    var s = box('0 0 200 210'), g, i, pts = [[46,30,-30],[78,13,-7]];
+    mk('ellipse', {cx:104, cy:196, rx:76, ry:11, fill:'#E2CDA6', opacity:.85}, s);
+    mk('rect', {x:44, y:176, width:112, height:18, rx:8, fill:'#C4831F'}, s);
+    mk('rect', {x:44, y:176, width:112, height:6,  rx:3, fill:'#DC9636'}, s);
+    mk('rect', {x:92, y:74, width:17, height:104, rx:6, fill:'#EFDCBA'}, s);
+    for (i = 0; i < 7; i++){
+      mk('line', {x1:92, y1:85 + i * 14, x2:109, y2:85 + i * 14, stroke:'#DCC49B', 'stroke-width':2.4}, s);
+    }
+    mk('rect', {x:38, y:60,  width:116, height:16, rx:7, fill:'#E8CFA6', stroke:'#C9AC7C', 'stroke-width':2}, s);
+    mk('rect', {x:38, y:60,  width:116, height:5.5, rx:2.7, fill:'#F8ECD6'}, s);
+    mk('rect', {x:66, y:128, width:92, height:14, rx:6, fill:'#E8CFA6', stroke:'#C9AC7C', 'stroke-width':2}, s);
+    mk('rect', {x:66, y:128, width:92, height:5, rx:2.5, fill:'#F8ECD6'}, s);
+    mk('line', {x1:74, y1:76, x2:74, y2:104, stroke:'#C7AE86', 'stroke-width':3}, s);
+    mk('circle', {cx:74, cy:114, r:10, fill:'#F2795C'}, s);
+    mk('circle', {cx:70.6, cy:110.6, r:3.1, fill:'#FFFFFF', opacity:.55}, s);
+    g = mk('g', {transform:'translate(124 60)'}, s);
+    mk('path', {d:'M0 0 C-16 0 -24 -11 -24 -24 C-24 -40 -13 -50 0 -50 C13 -50 24 -40 24 -24 C24 -11 16 0 0 0 Z', fill:'#8A6A45'}, g);
+    mk('path', {d:'M-21 -39 L-27 -59 L-7 -50 Z', fill:'#8A6A45'}, g);
+    mk('path', {d:'M21 -39 L27 -59 L7 -50 Z', fill:'#8A6A45'}, g);
+    mk('circle', {cx:-8, cy:-28, r:3.4, fill:'#FFF6E6'}, g);
+    mk('circle', {cx:8,  cy:-28, r:3.4, fill:'#FFF6E6'}, g);
+    mk('path', {d:'M23 -8 C41 -6 46 -22 37 -36', stroke:'#8A6A45', 'stroke-width':9, 'stroke-linecap':'round'}, g);
+    for (i = 0; i < pts.length; i++){
+      g = mk('g', {transform:'translate(' + pts[i][0] + ' ' + pts[i][1] + ') rotate(' + pts[i][2] + ') scale(' + (1 - i * .2) + ')'}, s);
+      mk('path', {d:'M0 0 C11 -15 33 -15 44 0 C33 15 11 15 0 0 Z', fill:'#8FCBA6'}, g);
+      mk('path', {d:'M2 0 L42 0', stroke:'#6FB392', 'stroke-width':1.6}, g);
+    }
+    return s;
+  }
+
+  var PARTS = {paw:paw, album:album, burst:burst, ball:ball, bowl:bowl, bed:bed, tree:tree, hero:hero};
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-part]'), function(host){
+    var fn = PARTS[host.getAttribute('data-part')];
+    if (fn) host.appendChild(fn());
+  });
+
+  /* 可选编辑态：访问时加 ?edit=1 才出现按钮；作为 iframe 嵌入时完全不受影响 */
+  if (/[?&]edit=1/.test(location.search)){
+    document.body.classList.add('editing');
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'edit-bar';
+    b.textContent = '✎ 可编辑';
+    b.addEventListener('click', function(){
+      var on = document.body.classList.toggle('edit-on');
+      document.getElementById('panel').setAttribute('contenteditable', on ? 'true' : 'false');
+      b.textContent = on ? '✓ 编辑中（点击退出）' : '✎ 可编辑';
+    });
+    document.body.appendChild(b);
+  }
+})();
+</script>
+
+</body>
+</html>
